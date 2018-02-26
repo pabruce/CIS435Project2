@@ -13,48 +13,111 @@ import java.io.*;
  */
 public class ShiftCipher 
 {
-    public static final String ALPHABET = "abcdefghijklmnopqrstuvwxyz";
- 
-    public static String encryptShiftCypher(String plainText, int shiftKey)
+    public static final String ALPHABET_LOWCASE = "abcdefghijklmnopqrstuvwxyz";
+    public static final String ALPHABET_UPPCASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    
+    //encrypt checks for both upper and lower case
+    public static String encryptShiftCipher(String plainText, int shiftKey)
     {
-        plainText = plainText.toLowerCase();
         String cipherText = "";
         for (int i = 0; i < plainText.length(); i++)
         {
-            int charPosition = ALPHABET.indexOf(plainText.charAt(i));
-            int keyVal = (shiftKey + charPosition) % 26;
-            char replaceVal = ALPHABET.charAt(keyVal);
-            cipherText += replaceVal;
+            int charPosition = -1;
+            char replaceVal;
+            int keyVal = -1;
+            char val = plainText.charAt(i);
+            System.out.println(val);
+            //checks here for upper case letters
+            if(Character.isUpperCase(val))
+            {
+                charPosition = ALPHABET_UPPCASE.indexOf(val);
+                if(charPosition != -1)
+                {
+                    keyVal = (shiftKey + charPosition) % 26;
+                    replaceVal = ALPHABET_UPPCASE.charAt(keyVal);
+                } 
+                else 
+                {
+                    replaceVal = plainText.charAt(i);
+                }           
+            } 
+            //checks for lower case from user input
+            else
+            {
+                charPosition = ALPHABET_LOWCASE.indexOf(val);
+                if(charPosition != -1) 
+                {
+                    keyVal = (shiftKey + charPosition) % 26;
+                    replaceVal = ALPHABET_LOWCASE.charAt(keyVal);
+                } else 
+                {
+                    replaceVal = plainText.charAt(i);
+                }
+            }       
+            //outputs encrypted cipher text, value for cipher shift applied in main 
+            //System.out.println("Encrypted Text:" + cipherText);
+            cipherText += replaceVal;        
         }
         return cipherText;
     }
-    
-        public static String decryptShiftCyber(String cipherText, int shiftKey)
+
+    public static String decryptShiftCipher(String cipherText, int shiftKey)
     {
-        cipherText = cipherText.toLowerCase();
         String plainText = "";
         for (int i = 0; i < cipherText.length(); i++)
         {
-            int charPosition = ALPHABET.indexOf(cipherText.charAt(i));
-            int keyVal = (charPosition - shiftKey) % 26;
-            if (keyVal < 0)
+            int charPosition = -1;
+            char replaceVal;
+            int keyVal = -1;
+            char val = cipherText.charAt(i);
+
+            if(Character.isUpperCase(val)) 
             {
-                keyVal = ALPHABET.length() + keyVal;
+                charPosition = ALPHABET_UPPCASE.indexOf(val);
+                if(charPosition != -1) 
+                {
+                    keyVal = (charPosition - shiftKey) % 26;
+                    if (keyVal < 0) 
+                    {
+                        keyVal = ALPHABET_UPPCASE.length() + keyVal;
+                    }
+                    replaceVal = ALPHABET_UPPCASE.charAt(keyVal);
+                } else 
+                {
+                    replaceVal = cipherText.charAt(i);
+                }           
+            } 
+            else
+            {
+                charPosition = ALPHABET_LOWCASE.indexOf(val);
+                if(charPosition != -1) 
+                {
+                    keyVal = (charPosition - shiftKey) % 26;
+                    if (keyVal < 0) 
+                    {
+                        keyVal = ALPHABET_LOWCASE.length() + keyVal;
+                    }
+                    replaceVal = ALPHABET_LOWCASE.charAt(keyVal);
+                } 
+                else 
+                {
+                    replaceVal = cipherText.charAt(i);
+                }
             }
-            char replaceVal = ALPHABET.charAt(keyVal);
+            //System.out.println("Decrypted Text:" + plainText);
             plainText += replaceVal;
         }
         return plainText;
     }
-    
-        public static void main(String[] args)
+
+    public static void main(String[] args)
     {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter the String for Encryption: ");
         String message = new String();
-        message = sc.next();
-        System.out.println(encryptShiftCypher(message, 3));
-        System.out.println(decryptShiftCyber(encryptShiftCypher(message, 3), 3));
+        message = sc.nextLine();
+        System.out.println(encryptShiftCipher(message, 3));
+        System.out.println(decryptShiftCipher(encryptShiftCipher(message, 3), 3));
         sc.close();
-    }  
-}
+    }
+    }
