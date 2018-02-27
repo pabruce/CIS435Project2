@@ -1,13 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * This class handles an input from the user
+ * It runs the input by letter and returns an encryption/decryption
+ * It can handle Lowercase, Uppercase and Spaces
  */
 package cis435project2phase1;
-
 /**
  *
- * @author bruce
+ * @author Patrick Bruce
+ * @date   2/20/18
  */
 public class ShiftCipher 
 {
@@ -18,10 +18,11 @@ public class ShiftCipher
     public static String encryptShiftCipher(String plainText, int shiftKey)
     {
         String cipherText = "";
+        
         for (int i = 0; i < plainText.length(); i++)
         {
             int charPosition = -1;
-            char replaceVal;
+            char replaceValue;
             int keyVal = -1;
             char val = plainText.charAt(i);
             System.out.println(val);
@@ -32,12 +33,13 @@ public class ShiftCipher
                 if(charPosition != -1)
                 {
                     keyVal = (shiftKey + charPosition) % 26;
-                    replaceVal = ALPHABET_UPPCASE.charAt(keyVal);
+                    replaceValue = ALPHABET_UPPCASE.charAt(keyVal);
                 } 
                 else 
                 {
-                    replaceVal = plainText.charAt(i);
-                }           
+                    replaceValue = plainText.charAt(i);
+                }   
+             
             } 
             //checks for lower case from user input
             else
@@ -46,15 +48,15 @@ public class ShiftCipher
                 if(charPosition != -1) 
                 {
                     keyVal = (shiftKey + charPosition) % 26;
-                    replaceVal = ALPHABET_LOWCASE.charAt(keyVal);
+                    replaceValue = ALPHABET_LOWCASE.charAt(keyVal);
                 } else 
                 {
-                    replaceVal = plainText.charAt(i);
+                    replaceValue = plainText.charAt(i);
                 }
             }       
             //outputs encrypted cipher text, value for cipher shift applied in main 
             //System.out.println("Encrypted Text:" + cipherText);
-            cipherText += replaceVal;        
+            cipherText += replaceValue;        
         }
         return cipherText;
     }
@@ -65,45 +67,45 @@ public class ShiftCipher
         for (int i = 0; i < cipherText.length(); i++)
         {
             int charPosition = -1;
-            char replaceVal;
-            int keyVal = -1;
-            char val = cipherText.charAt(i);
+            char replaceValue;
+            int keyValue = -1;
+            char cValue = cipherText.charAt(i);
 
-            if(Character.isUpperCase(val)) 
+            if(Character.isUpperCase(cValue)) 
             {
-                charPosition = ALPHABET_UPPCASE.indexOf(val);
+                charPosition = ALPHABET_UPPCASE.indexOf(cValue);
                 if(charPosition != -1) 
                 {
-                    keyVal = (charPosition - shiftKey) % 26;
-                    if (keyVal < 0) 
+                    keyValue = (charPosition - shiftKey) % 26;
+                    if (keyValue < 0) 
                     {
-                        keyVal = ALPHABET_UPPCASE.length() + keyVal;
+                        keyValue = ALPHABET_UPPCASE.length() + keyValue;
                     }
-                    replaceVal = ALPHABET_UPPCASE.charAt(keyVal);
+                    replaceValue = ALPHABET_UPPCASE.charAt(keyValue);
                 } else 
                 {
-                    replaceVal = cipherText.charAt(i);
+                    replaceValue = cipherText.charAt(i);
                 }           
             } 
             else
             {
-                charPosition = ALPHABET_LOWCASE.indexOf(val);
+                charPosition = ALPHABET_LOWCASE.indexOf(cValue);
                 if(charPosition != -1) 
                 {
-                    keyVal = (charPosition - shiftKey) % 26;
-                    if (keyVal < 0) 
+                    keyValue = (charPosition - shiftKey) % 26;
+                    if (keyValue < 0) 
                     {
-                        keyVal = ALPHABET_LOWCASE.length() + keyVal;
+                        keyValue = ALPHABET_LOWCASE.length() + keyValue;
                     }
-                    replaceVal = ALPHABET_LOWCASE.charAt(keyVal);
+                    replaceValue = ALPHABET_LOWCASE.charAt(keyValue);
                 } 
                 else 
                 {
-                    replaceVal = cipherText.charAt(i);
+                    replaceValue = cipherText.charAt(i);
                 }
             }
             //System.out.println("Decrypted Text:" + plainText);
-            plainText += replaceVal;
+            plainText += replaceValue;
         }
         return plainText;
     }
