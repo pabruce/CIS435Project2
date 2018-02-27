@@ -5,8 +5,6 @@
  */
 package cis435project2phase1;
 
-import java.util.Scanner;
-import java.io.*;
 /**
  *
  * @author bruce
@@ -109,15 +107,4 @@ public class ShiftCipher
         }
         return plainText;
     }
-
-    public static void main(String[] args)
-    {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter the String for Encryption: ");
-        String message = new String();
-        message = sc.nextLine();
-        System.out.println(encryptShiftCipher(message, 3));
-        System.out.println(decryptShiftCipher(encryptShiftCipher(message, 3), 3));
-        sc.close();
-    }
-    }
+}
