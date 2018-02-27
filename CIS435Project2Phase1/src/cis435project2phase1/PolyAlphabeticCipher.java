@@ -2,6 +2,7 @@
  * This class handles an input from the user
  * It runs the input by letter and returns an encryption/decryption
  * It can handle Lowercase, Uppercase and Spaces
+ * However, it returns the decrypted text as uppercase
  */
 package cis435project2phase1;
 

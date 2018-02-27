@@ -8,6 +8,7 @@ package cis435project2phase1;
 /**
  *
  * @author bruce
+ * @date 2/25/18
  */
 public class SubstitutionCipher 
 {
@@ -19,37 +20,37 @@ public class SubstitutionCipher
     
     public static String subEncrypt(String m)
     {
-        char eAEncrypter[] = new char[(m.length())];
+        char cEncrypt[] = new char[(m.length())];
         for (int i = 0; i < m.length(); i++)
         {
             for (int j = 0; j < 26; j++)
             {
                 if (oA[j] == m.charAt(i))
                 {
-                    eAEncrypter[i] = eA[j];
+                    cEncrypt[i] = eA[j];
                     break;
                 }
             }
         }
-        
-        return (new String(eAEncrypter));
+        return (new String(cEncrypt));
     }
     
     public static String subDecrypt(String m)
     {
-        char oADecrypter[] = new char[(m.length())];
-        for (int i = 0; i < m.length(); i++)
+        char cDecrypt[] = new char[(m.length())];
+        
+        for (int l = 0; l < m.length(); l++)
         {
-            for (int j = 0; j < 26; j++)
+            for (int n = 0; n < 26; n++)
             {
-                if (oA[j] == m.charAt(i))
+                if (eA[n] == m.charAt(l))
                 {
-                    oADecrypter[i] = oA[j];
+                    cDecrypt[l] = oA[n];
                     break;
                 }
             }
         }
         
-        return (new String(oADecrypter));
+        return (new String(cDecrypt));
     }
 }
