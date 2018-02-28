@@ -13,14 +13,16 @@ public class PolyAlphabeticCipherTest
 {
     public static void main(String[] args)
     {
-        System.out.println("Step # 1 - Test PolyAlphabetic Encryption()");
+        System.out.println("Step # 1 - Test Polyalphabetic Encryption()");
         String key = "POLYALPHABETICCIPHER";
         String message = "Hello World";
         String encryptedMsg = polyEncrypt(message, key);
         System.out.println("String: " + message);
-        System.out.println("Encrypted message: " + encryptedMsg);
-        System.out.println("Expected Decrypted message: HELLOWORLD");
-        System.out.println("Decrypted message: " + polyDecrypt(encryptedMsg, key));
+        System.out.println("Result: " + encryptedMsg);
+        
+        System.out.println("Step # 2 - Test Polyalphabetic Decryption()");
+        System.out.println("Expected Result: HELLOWORLD");
+        System.out.println("Result: " + polyDecrypt(encryptedMsg, key));
     }
     
 }

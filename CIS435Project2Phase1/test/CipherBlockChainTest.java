@@ -19,10 +19,13 @@ public class CipherBlockChainTest
         String key = "thisisonlyatest";
         String plainText = "Hello World";
         byte[] encrypted = cipherChainEncrypt(plainText, key);
-        System.out.println("Test Cipher Block Chain Encryption(): " + cipherChainEncrypt(plainText,key));
+        System.out.println("Step # 1 - Cipher Block Chain Encryption()");
+        System.out.println("Result: " + cipherChainEncrypt(plainText,key));
+        
+        System.out.println("Step # 2 - Cipher Block Chain Decryption()");
         String decrypted = cipherChainDecrypt(encrypted, key);
-        System.out.println("Expected Decryption : Hello World");
-        System.out.println("Test Cipher Block Chain Decryption(): " + cipherChainDecrypt(encrypted,key));
+        System.out.println("Expected Result : Hello World");
+        System.out.println("Result: " + cipherChainDecrypt(encrypted,key));
     }
    
     

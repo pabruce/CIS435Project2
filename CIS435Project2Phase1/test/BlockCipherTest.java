@@ -23,11 +23,14 @@ public class BlockCipherTest
         BlockCipher advEncrStndrd = new BlockCipher(encryptionKey);
         byte[] cipherText = advEncrStndrd.blockEncrypt(plainText);
         byte[] decryptedCipherText = advEncrStndrd.blockDecrypt(cipherText);
-
+        
+        System.out.println("Step # 1 - Test Block Cipher Encryption()");
         System.out.println("Plain Text message: " +new String(plainText));
-        System.out.println("Test Block Cipher Encryption() message: " +new String(cipherText));
-        System.out.println("Expected Decrypted message: Hello World");
-        System.out.println("Test Block Cipher Decryption() message: "  +new String(decryptedCipherText));
+        System.out.println("Result: " +new String(cipherText));
+        
+        System.out.println("Step # 2 - Test Block Cipher Decryption()");
+        System.out.println("Expected result: Hello World");
+        System.out.println("Result: "  +new String(decryptedCipherText));
         
      }
 }

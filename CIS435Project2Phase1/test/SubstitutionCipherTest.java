@@ -21,9 +21,12 @@ public class SubstitutionCipherTest
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter the message: ");
         String en = subEncrypt(sc.next().toLowerCase());
-        System.out.println("Test Substitution Encryption() message: " + en);
-        System.out.println("Expected Substitution Decrypted message: hello");
-        System.out.println("Test Substitution Decryption() message: " + subDecrypt(en));
+        System.out.println("Step # 1 - Test Substitution Cipher Encryption()");
+        System.out.println("Result: " + en);
+        
+        System.out.println("Step # 2 - Test Substitution Cipher Decryption()");
+        System.out.println("Expected Result: hello");
+        System.out.println("Result: " + subDecrypt(en));
         sc.close();
     }
 }
