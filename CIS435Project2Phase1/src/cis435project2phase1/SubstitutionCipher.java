@@ -7,7 +7,7 @@ package cis435project2phase1;
 
 /**
  *
- * @author bruce
+ * @author Patrick Bruce
  * @date 2/25/18
  */
 public class SubstitutionCipher 

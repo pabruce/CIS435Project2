@@ -6,7 +6,7 @@
 
 /**
  *
- * @author bruce
+ * @author Patrick Bruce
  * @date 2/24/18
  */
 import static cis435project2phase1.ShiftCipher.decryptShiftCipher;

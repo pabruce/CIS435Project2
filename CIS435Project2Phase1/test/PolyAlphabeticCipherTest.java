@@ -6,7 +6,7 @@
 import static cis435project2phase1.PolyAlphabeticCipher.polyDecrypt;
 import static cis435project2phase1.PolyAlphabeticCipher.polyEncrypt;
 /**
- * @author bruce
+ * @author Patrick Bruce
  * @date 2/24/18
  */
 public class PolyAlphabeticCipherTest 
@@ -21,7 +21,6 @@ public class PolyAlphabeticCipherTest
         System.out.println("Encrypted message: " + encryptedMsg);
         System.out.println("Expected Decrypted message: HELLOWORLD");
         System.out.println("Decrypted message: " + polyDecrypt(encryptedMsg, key));
-
     }
     
 }

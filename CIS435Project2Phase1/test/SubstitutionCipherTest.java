@@ -6,7 +6,7 @@
 
 /**
  *
- * @author bruce
+ * @author Patrick Bruce
  * @date 2/25/18
  */
 

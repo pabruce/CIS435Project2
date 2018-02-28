@@ -1,12 +1,14 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * The test uses an encryption key I hand generated. 
+ * The plaintext is converted using the standard characterset to Bytes 
+ * AES is then used to run the encryption of the plain text 
+ * The test uses 'Hello' and encryption as well as decrypts the message
  */
 
 /**
  *
- * @author Patrick
+ * @author Patrick Bruce
+ * @date 2/27/18
  */
 import cis435project2phase1.BlockCipher;
 import cis435project2phase1.BlockCipher.*;
@@ -25,7 +27,7 @@ public class BlockCipherTest
         System.out.println("Plain Text message: " +new String(plainText));
         System.out.println("Encrypted Block Cipher message: " +new String(cipherText));
         System.out.println("Expected Decrypted message: Hello World");
-        System.out.println("Decrypted message: " +new String(decryptedCipherText));
+        System.out.println("Decrypted message: "  +new String(decryptedCipherText));
         
      }
 }

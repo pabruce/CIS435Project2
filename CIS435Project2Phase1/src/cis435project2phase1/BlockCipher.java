@@ -1,13 +1,14 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * This class uses a key generator 
+ * With an array of bytes to generate the encryption
+ * it runs the generated key through Advanced Encryption Standard 
  */
 package cis435project2phase1;
 
 /**
  *
- * @author bruce
+ * @author Patrick Bruce
+ * @date 2/27/18
  */
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
@@ -18,7 +19,7 @@ public class BlockCipher
 
     private static final String BlockAES = "AES";
 
-    //using AES to encrypt / decrypt block cipher to base 64 
+    //using AES to encrypt / decrypt block cipher
     public BlockCipher(byte[] key)
     {
         this.key = key;
@@ -34,11 +35,8 @@ public class BlockCipher
         return cipher.doFinal(plainText);
     }
 
-    /**
-     * Decrypts the given byte array
-     *
-     * @param cipherText The data to decrypt
-     */
+
+     //Decrypts the given byte array
     public byte[] blockDecrypt(byte[] cipherText) throws Exception
     {
         SecretKeySpec secretKey = new SecretKeySpec(key, BlockAES);
