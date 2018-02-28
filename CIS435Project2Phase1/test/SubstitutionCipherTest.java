@@ -1,7 +1,7 @@
 /*
  * The test takes a message string 'hello'
  * It takes user input as a command, however it was using a test case 'hello'
- * 
+ * The message it encrypts is a custom alphabet using 'qzuuc' as its encryption
  */
 
 /**
@@ -21,9 +21,9 @@ public class SubstitutionCipherTest
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter the message: ");
         String en = subEncrypt(sc.next().toLowerCase());
-        System.out.println("Encrypted message: " + en);
-        System.out.println("Expected Decrypted message: hello");
-        System.out.println("Decrypted message: " + subDecrypt(en));
+        System.out.println("Test Substitution Encryption() message: " + en);
+        System.out.println("Expected Substitution Decrypted message: hello");
+        System.out.println("Test Substitution Decryption() message: " + subDecrypt(en));
         sc.close();
     }
 }

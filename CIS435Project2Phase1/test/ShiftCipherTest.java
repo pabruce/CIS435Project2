@@ -1,7 +1,7 @@
 /*
  * This test is run using a 12 letter shift
  * It tests the class, Shift Cipher against a 12 letter shift
- * The test it was used against was "Hello"
+ * The test it was used against was "Hello World"
  */
 
 /**
@@ -28,11 +28,10 @@ public class ShiftCipherTest
         message = sc.nextLine();
         
         System.out.println("Step # 1 - Test Shift Cipher Encryption()");
-        System.out.println("Expected Result: Tqxxa");
         System.out.println("Result: " + encryptShiftCipher(message,12));
         System.out.println("-----------------------------------------");
         System.out.println("Step # 2 - Test Decryption()");
-        System.out.println("Expected Result: Hello" );
+        System.out.println("Expected Result: Hello World" );
         System.out.println("Result: " + decryptShiftCipher(encryptShiftCipher(message, 12), 12));
         
         sc.close();

@@ -9,7 +9,6 @@
  * @date 2/27/18
  */
 
-
 import static cis435project2phase1.CipherBlockChain.cipherChainDecrypt;
 import static cis435project2phase1.CipherBlockChain.cipherChainEncrypt;
 
@@ -20,10 +19,10 @@ public class CipherBlockChainTest
         String key = "thisisonlyatest";
         String plainText = "Hello World";
         byte[] encrypted = cipherChainEncrypt(plainText, key);
-        System.out.println("Encrypted: " + cipherChainEncrypt(plainText,key));
+        System.out.println("Test Cipher Block Chain Encryption(): " + cipherChainEncrypt(plainText,key));
         String decrypted = cipherChainDecrypt(encrypted, key);
         System.out.println("Expected Decryption : Hello World");
-        System.out.println("Decrypted: " + cipherChainDecrypt(encrypted,key));
+        System.out.println("Test Cipher Block Chain Decryption(): " + cipherChainDecrypt(encrypted,key));
     }
    
     

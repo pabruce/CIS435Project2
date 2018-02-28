@@ -2,17 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/Patrick/Documents/GitHub/CIS435Project2/CIS435Project2Phase1/test/ShiftCipherTest.java</file>
-            <file>file:/C:/Users/Patrick/Documents/GitHub/CIS435Project2/CIS435Project2Phase1/test/PolyAlphabeticCipherTest.java</file>
-            <file>file:/C:/Users/Patrick/Documents/GitHub/CIS435Project2/CIS435Project2Phase1/src/cis435project2phase1/CipherBlockChain.java</file>
-            <file>file:/C:/Users/Patrick/Documents/GitHub/CIS435Project2/CIS435Project2Phase1/test/CipherBlockChainTest.java</file>
-            <file>file:/C:/Users/Patrick/Documents/GitHub/CIS435Project2/CIS435Project2Phase1/src/cis435project2phase1/SubstitutionCipher.java</file>
-            <file>file:/C:/Users/Patrick/Documents/GitHub/CIS435Project2/CIS435Project2Phase1/src/cis435project2phase1/BlockCipher.java</file>
-            <file>file:/C:/Users/Patrick/Documents/GitHub/CIS435Project2/CIS435Project2Phase1/src/cis435project2phase1/PolyAlphabeticCipher.java</file>
-            <file>file:/C:/Users/Patrick/Documents/GitHub/CIS435Project2/CIS435Project2Phase1/test/SubstitutionCipherTest.java</file>
-            <file>file:/C:/Users/Patrick/Documents/GitHub/CIS435Project2/CIS435Project2Phase1/test/BlockCipherTest.java</file>
-            <file>file:/C:/Users/Patrick/Documents/GitHub/CIS435Project2/CIS435Project2Phase1/src/cis435project2phase1/ShiftCipher.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

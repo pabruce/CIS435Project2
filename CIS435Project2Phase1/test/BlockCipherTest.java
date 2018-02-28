@@ -25,9 +25,9 @@ public class BlockCipherTest
         byte[] decryptedCipherText = advEncrStndrd.blockDecrypt(cipherText);
 
         System.out.println("Plain Text message: " +new String(plainText));
-        System.out.println("Encrypted Block Cipher message: " +new String(cipherText));
+        System.out.println("Test Block Cipher Encryption() message: " +new String(cipherText));
         System.out.println("Expected Decrypted message: Hello World");
-        System.out.println("Decrypted message: "  +new String(decryptedCipherText));
+        System.out.println("Test Block Cipher Decryption() message: "  +new String(decryptedCipherText));
         
      }
 }
