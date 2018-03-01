@@ -13,10 +13,10 @@ package cis435project2phase1;
 
 import javax.crypto.Cipher;
 import javax.crypto.Mac;
-import javax.crypto.spec.IvParameterSpec;
-import javax.crypto.spec.SecretKeySpec;
 import java.security.MessageDigest;
 import java.security.SecureRandom;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
 
 public class CipherBlockChain 
 {
