@@ -26,14 +26,14 @@ public class RSACipher
     public RSACipher()
     {
         rand = new Random();
+        
         p = BigInteger.probablePrime(bitlength, rand);
         q = BigInteger.probablePrime(bitlength, rand);
         n = p.multiply(q);
         pqSub = p.subtract(BigInteger.ONE).multiply(q.subtract(BigInteger.ONE));
         e = BigInteger.probablePrime(bitlength / 2,rand);
         
-        while (pqSub.gcd(e).compareTo(BigInteger.ONE) > 0 && e.compareTo(pqSub) < 0)
-        {
+        while (pqSub.gcd(e).compareTo(BigInteger.ONE) > 0 && e.compareTo(pqSub) < 0){
             e.add(BigInteger.ONE);
         }
         d = e.modInverse(pqSub);
@@ -46,22 +46,23 @@ public class RSACipher
         this.n = n;
     }
     
-     public static String bytetoStringConversion(byte[] encrypted)
+     public static String bytetoStringConversion(byte[] encrypt)
     {
-        String test = "";
-        for (byte b : encrypted)
+        String plaintextTester = "";
+        
+        for (byte b : encrypt)
         {
-            test += Byte.toString(b);
+            plaintextTester += Byte.toString(b);
         }
-        return test;
+        return plaintextTester;
     }
  
-    public byte[] encrypt(byte[] m)
+    public byte[] rsaEncrypt(byte[] m)
     {
         return (new BigInteger(m)).modPow(e, n).toByteArray();
     }
  
-    public byte[] decrypt(byte[] m)
+    public byte[] rsaDecrypt(byte[] m)
     {
         return (new BigInteger(m)).modPow(d, n).toByteArray();
     }

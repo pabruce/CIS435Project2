@@ -18,22 +18,21 @@ import static cis435project2phase1.RSACipher.*;
 
 public class RSACipherTest 
 {
-    @SuppressWarnings("deprecation")
     public static void main(String[] args) throws IOException
     {
         RSACipher rsa = new RSACipher();
         DataInputStream in = new DataInputStream(System.in);
-        String teststring;
+        String plainText;
         System.out.println("Enter the plain text:");
-        teststring = in.readLine();
+        plainText = in.readLine();
         System.out.println("Step # 1 - Test RSA Cipher Encryption()");
-        System.out.println("Encrypting String: " + teststring);
-        System.out.println("String in Bytes: " + bytetoStringConversion(teststring.getBytes()));
+        System.out.println("Encrypting String: " + plainText);
+        System.out.println("String in Bytes: " + bytetoStringConversion(plainText.getBytes()));
         
         // encrypt
-        byte[] encrypted = rsa.encrypt(teststring.getBytes());
+        byte[] encrypted = rsa.rsaEncrypt(plainText.getBytes());
         // decrypt
-        byte[] decrypted = rsa.decrypt(encrypted);
+        byte[] decrypted = rsa.rsaDecrypt(encrypted);
         
         System.out.println("Step # 2 - Test RSA Cipher Decryption()");
         System.out.println("Decrypting Bytes: " + bytetoStringConversion(decrypted));
