@@ -7,7 +7,8 @@ package cis435project2phase1;
 
 /**
  *
- * @author bruce
+ * @author Patrick Bruce
+ * @date   2/28/18
  */
 
 
