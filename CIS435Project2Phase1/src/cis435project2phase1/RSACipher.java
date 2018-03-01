@@ -1,7 +1,7 @@
  /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * This class the standard RSA algorithm we used in class to convert to bytes. 
+ * It takes the bytes into an array and then decrypts the bytes into strings. 
+ * 
  */
 package cis435project2phase1;
 

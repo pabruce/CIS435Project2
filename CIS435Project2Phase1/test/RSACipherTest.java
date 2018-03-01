@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * RSACipher test takes a plain text, encrypts it with the RSA class
+ * It decrypts using a converter from Byte to String output
+ * The string output handles any input and encrypts it using bytes and decrypts
  */
 
 /**
@@ -26,6 +26,7 @@ public class RSACipherTest
         String teststring;
         System.out.println("Enter the plain text:");
         teststring = in.readLine();
+        System.out.println("Step # 1 - Test RSA Cipher Encryption()");
         System.out.println("Encrypting String: " + teststring);
         System.out.println("String in Bytes: " + bytetoStringConversion(teststring.getBytes()));
         
@@ -33,6 +34,8 @@ public class RSACipherTest
         byte[] encrypted = rsa.encrypt(teststring.getBytes());
         // decrypt
         byte[] decrypted = rsa.decrypt(encrypted);
+        
+        System.out.println("Step # 2 - Test RSA Cipher Decryption()");
         System.out.println("Decrypting Bytes: " + bytetoStringConversion(decrypted));
         System.out.println("Decrypted String: " + new String(decrypted));
     }
