@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Wrote 2 alphabets, an original and encrypted
+ * The encryption takes the string and compares a counter of characters for the msg
+ * Then, it takes those characters, finds their equivalent in the alphabet substitute
  */
 package cis435project2phase1;
 

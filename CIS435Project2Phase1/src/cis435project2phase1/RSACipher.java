@@ -19,7 +19,7 @@ import java.util.Random;
 
 public class RSACipher
 {
-    private BigInteger p,q,n,e,d,ph;
+    private BigInteger p,q,n,e,d,pqSub;
     private Random rand;
     private int bitlength = 1024;
     
@@ -29,14 +29,14 @@ public class RSACipher
         p = BigInteger.probablePrime(bitlength, rand);
         q = BigInteger.probablePrime(bitlength, rand);
         n = p.multiply(q);
-        ph = p.subtract(BigInteger.ONE).multiply(q.subtract(BigInteger.ONE));
+        pqSub = p.subtract(BigInteger.ONE).multiply(q.subtract(BigInteger.ONE));
         e = BigInteger.probablePrime(bitlength / 2,rand);
         
-        while (ph.gcd(e).compareTo(BigInteger.ONE) > 0 && e.compareTo(ph) < 0)
+        while (pqSub.gcd(e).compareTo(BigInteger.ONE) > 0 && e.compareTo(pqSub) < 0)
         {
             e.add(BigInteger.ONE);
         }
-        d = e.modInverse(ph);
+        d = e.modInverse(pqSub);
     }
     
     public RSACipher(BigInteger e,BigInteger d, BigInteger n)
