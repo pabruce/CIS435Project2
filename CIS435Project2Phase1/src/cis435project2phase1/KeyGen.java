@@ -7,7 +7,7 @@ package cis435project2phase1;
 
 //import java.time.Instant;
 import java.util.Random;
-
+import java.math.BigInteger;
 /**
  *
  * @author Forrest
@@ -24,5 +24,22 @@ public class KeyGen {
         output = Math.toIntExact(seed);
         output = primes[output % primes.length];
         return output;
+    }
+    
+    public final class GenerateKeyPair() 
+    {
+        int bitlength = 1024;
+         
+        BigInteger e,d,n;
+        BigInteger p,q;
+        
+        Random rand = new Random();
+        
+       p = BigInteger.probablePrime(bitlength,rand);
+       q = BigInteger.probablePrime(bitlength,rand);
+       n = p.multiply(q);
+       
+       pqSub = p.subtract(BigInteger.ONE)
+        
     }
 }
