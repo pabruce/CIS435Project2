@@ -14,15 +14,13 @@ package cis435project2phase1;
 
 import java.math.BigInteger;
 import java.util.Random;
+import cis435project2phase1.KeyGen;
 
 
 
 public class RSACipher
 {
-    private BigInteger p,q,n,e,d,toTient;
-    private Random rand;
-    private int bitlength = 1024;
-    
+/*    
     public RSACipher()
     {
         rand = new Random();
@@ -39,14 +37,8 @@ public class RSACipher
         }
         d = e.modInverse(toTient);
     }
-    
-    public RSACipher(BigInteger e,BigInteger d, BigInteger n)
-    {
-        this.e = e;
-        this.d = d;
-        this.n = n;
-    }
-    
+    */
+
      public static String bytetoStringConversion(byte[] encrypt)
     {
         String plaintextTester = "";
@@ -57,7 +49,7 @@ public class RSACipher
         }
         return plaintextTester;
     }
- 
+ /*
     public byte[] rsaEncrypt(byte[] m)
     {
         return (new BigInteger(m)).modPow(e, n).toByteArray();
@@ -67,7 +59,7 @@ public class RSACipher
     {
         return (new BigInteger(m)).modPow(d, n).toByteArray();
     }
-    
+   */ 
     public byte[] encrypt2(byte[] m, BigInteger e, BigInteger n)
     {
         return (new BigInteger(m).modPow(e, n).toByteArray());

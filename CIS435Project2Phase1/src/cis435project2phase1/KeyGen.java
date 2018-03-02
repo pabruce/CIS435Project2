@@ -26,13 +26,13 @@ public class KeyGen {
         return output;
     }
     
-    public BigInteger GenerateKeyPair() 
+    public BigInteger[] GenerateKeyPair() 
     {
         int bitlength = 1024;
         
         BigInteger privateKey, publicKey;
          
-        BigInteger e,d,n;
+        BigInteger e,d,n,nvalue;
         BigInteger p,q,totient;
         
         Random rand = new Random();
@@ -49,11 +49,14 @@ public class KeyGen {
        {
            e.add(BigInteger.ONE);
        }
+       
        d = e.modInverse(totient);
        
        privateKey = d;
        publicKey = e;
+       nvalue = n;
        
-       return null; 
+       BigInteger[] output = new BigInteger[]{d,e,n};
+       return output; 
     }
 }
