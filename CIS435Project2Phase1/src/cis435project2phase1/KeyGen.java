@@ -8,6 +8,8 @@ package cis435project2phase1;
 //import java.time.Instant;
 import java.util.Random;
 import java.math.BigInteger;
+import cis435project2phase1.KeyPair;
+        
 /**
  *
  * @author Forrest
@@ -26,9 +28,10 @@ public class KeyGen {
         return output;
     }
     
-    public BigInteger[] GenerateKeyPair() 
+    public KeyPair GenerateKeyPair() 
     {
         int bitlength = 1024;
+        
         
         BigInteger privateKey, publicKey;
          
@@ -56,7 +59,12 @@ public class KeyGen {
        publicKey = e;
        nvalue = n;
        
-       BigInteger[] output = new BigInteger[]{d,e,n};
-       return output; 
+       KeyPair pair = new KeyPair();
+       
+       pair.bigboy[0] = d;
+       pair.bigboy[1] = e;
+       pair.bigboy[2] = n;
+       
+       return pair; 
     }
 }

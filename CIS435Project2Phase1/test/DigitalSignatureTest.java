@@ -5,6 +5,7 @@ import static cis435project2phase1.RSACipher.bytetoStringConversion;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.util.Scanner;
+import cis435project2phase1.KeyPair;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -24,7 +25,7 @@ public class DigitalSignatureTest
         @SuppressWarnings("deprecation")
       public static void main(String args[]) throws IOException
     {
-        BigInteger[] keyPos = new BigInteger[3];
+        KeyPair keyPos;
         KeyGen keyG = new KeyGen();
         RSACipher rsa = new RSACipher();
         DataInputStream in = new DataInputStream(System.in);
@@ -36,13 +37,13 @@ public class DigitalSignatureTest
         BigInteger SenderE, SenderD, SenderN, ReceiverE, ReceiverD, ReceiverN;
         
         //d= 0,e = 1,n = 2
-        SenderN = keyPos[2];
-        SenderE = keyPos[1];
-        SenderD = keyPos[0];
+        SenderN = keyPos.bigboy[2];
+        SenderE = keyPos.bigboy[1];
+        SenderD = keyPos.bigboy[0];
         
-        ReceiverN = keyPos[2];
-        ReceiverE = keyPos[1];
-        ReceiverD = keyPos[0];
+        ReceiverN = keyPos.bigboy[2];
+        ReceiverE = keyPos.bigboy[1];
+        ReceiverD = keyPos.bigboy[0];
         
         
         System.out.println("Enter the plain text:");

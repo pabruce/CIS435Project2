@@ -14,6 +14,7 @@ import cis435project2phase1.RSACipher;
 import java.io.DataInputStream;
 import java.io.IOException;
 import cis435project2phase1.KeyGen;
+import cis435project2phase1.KeyPair;
 
 import static cis435project2phase1.RSACipher.*;
 import java.math.BigInteger;
@@ -22,7 +23,7 @@ public class RSACipherTest
 {
     public static void main(String[] args) throws IOException
     {
-        BigInteger[] keyPos = new BigInteger[3];
+        KeyPair keyPos;
         RSACipher rsa = new RSACipher();
         KeyGen keyG = new KeyGen();
         
@@ -38,8 +39,8 @@ public class RSACipherTest
         System.out.println("Encrypting String: " + plainText);
         System.out.println("String in Bytes: " + bytetoStringConversion(plainText.getBytes()));
         
-        byte[] encrypted = rsa.encrypt2(plainText.getBytes(), keyPos[1], keyPos[2]);
-        byte[] decrypted = rsa.decrypt2(encrypted, keyPos[0], keyPos[2]);
+        byte[] encrypted = rsa.encrypt2(plainText.getBytes(), keyPos.bigboy[1], keyPos.bigboy[2]);
+        byte[] decrypted = rsa.decrypt2(encrypted, keyPos.bigboy[0], keyPos.bigboy[2]);
         
         System.out.println("Step # 2 - Test RSA Cipher Decryption()");
         System.out.println("Decrypting Bytes: " + bytetoStringConversion(decrypted));
