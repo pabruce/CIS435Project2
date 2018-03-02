@@ -47,5 +47,6 @@ public class KeyGen {
        {
            e.add(BigInteger.ONE);
        }
+       d = e.modInverse(totient);
     }
 }
