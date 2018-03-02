@@ -1,4 +1,8 @@
 
+import cis435project2phase1.RSACipher;
+import static cis435project2phase1.RSACipher.bytetoStringConversion;
+import java.io.DataInputStream;
+import java.io.IOException;
 import java.util.Scanner;
 
 /*
@@ -13,10 +17,27 @@ import java.util.Scanner;
  */
 public class DigitalSignatureTest 
 {
-      public static void main(String args[])
+        @SuppressWarnings("deprecation")
+      public static void main(String args[]) throws IOException
     {
-        Scanner sc = new Scanner(System.in);
-   
-        sc.close();
+        String message;
+        int SenderPublicKey, SenderPrivateKey, ReceiverPublicKey, ReceiverPrivateKey;
+        
+        
+        
+        RSACipher rsa = new RSACipher();
+        DataInputStream in = new DataInputStream(System.in);
+        String teststring;
+        System.out.println("Enter the plain text:");
+        teststring = in.readLine();
+        System.out.println("Encrypting String: " + teststring);
+        System.out.println("String in Bytes: " + bytetoStringConversion(teststring.getBytes()));
+        
+        // encrypt
+        byte[] encrypted = rsa.rsaEncrypt(teststring.getBytes());
+        // decrypt
+        byte[] decrypted = rsa.rsaEncrypt(encrypted);
+        System.out.println("Decrypting Bytes: " + bytetoStringConversion(decrypted));
+        System.out.println("Decrypted String: " + new String(decrypted));
     }   
 }
