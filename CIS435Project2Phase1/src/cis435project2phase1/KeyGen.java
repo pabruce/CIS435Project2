@@ -26,7 +26,7 @@ public class KeyGen {
         return output;
     }
     
-    public final class GenerateKeyPair() 
+    public BigInteger GenerateKeyPair() 
     {
         int bitlength = 1024;
          
