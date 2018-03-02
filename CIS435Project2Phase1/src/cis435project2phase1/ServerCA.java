@@ -35,15 +35,19 @@ public class ServerCA
             serverSocket = new ServerSocket(9090);
             socket = serverSocket.accept();
             System.out.println("Connected");
-            inStream = new ObjectInputStream(socket.getInputStream());
+//            inStream = new ObjectInputStream(socket.getInputStream());
             
-            KeyGen keyGen = (KeyGen) inStream.readObject();
-            System.out.println("Keys Generated " + keyGen);
+//            KeyGen keyGen = (KeyGen) inStream.readObject();
+//            System.out.println("Keys Generated " + keyGen);
         }
-        catch (ClassNotFoundException ex) 
+        catch (SocketException se)
         {
-            Logger.getLogger(ServerCA.class.getName()).log(Level.SEVERE, null, ex);
+            System.exit(0);
         }
+//        catch (ClassNotFoundException ex) 
+//        {
+//            Logger.getLogger(ServerCA.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
     
     public static void main(String[] args) throws IOException

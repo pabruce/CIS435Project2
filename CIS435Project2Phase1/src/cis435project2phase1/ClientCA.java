@@ -39,11 +39,11 @@ private boolean isConnected = false;
             socket = new Socket("localHost", 9090);
             System.out.println("Connected");
             isConnected = true;
-            outputStream = new ObjectOutputStream(socket.getOutputStream());
-
-            KeyGen keyGen = new KeyGen();
-            System.out.println("Object to be written = " + keyGen);
-            outputStream.writeObject(keyGen);
+//            outputStream = new ObjectOutputStream(socket.getOutputStream());
+//
+//            KeyGen keyGen = new KeyGen();
+//            System.out.println("Object to be written = " + keyGen);
+//            outputStream.writeObject(keyGen.GenerateKeyPair());
 
            }
            catch (SocketException se) 
