@@ -34,9 +34,9 @@ public class DigitalSignatureTest
         System.out.println("String in Bytes: " + bytetoStringConversion(teststring.getBytes()));
         
         // encrypt
-        byte[] encrypted = rsa.encrypt(teststring.getBytes());
+        byte[] encrypted = rsa.rsaEncrypt(teststring.getBytes());
         // decrypt
-        byte[] decrypted = rsa.decrypt(encrypted);
+        byte[] decrypted = rsa.rsaEncrypt(encrypted);
         System.out.println("Decrypting Bytes: " + bytetoStringConversion(decrypted));
         System.out.println("Decrypted String: " + new String(decrypted));
     }   
