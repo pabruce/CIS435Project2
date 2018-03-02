@@ -29,6 +29,8 @@ public class KeyGen {
     public BigInteger GenerateKeyPair() 
     {
         int bitlength = 1024;
+        
+        BigInteger privateKey, publicKey;
          
         BigInteger e,d,n;
         BigInteger p,q,totient;
@@ -48,5 +50,10 @@ public class KeyGen {
            e.add(BigInteger.ONE);
        }
        d = e.modInverse(totient);
+       
+       privateKey = d;
+       publicKey = e;
+       
+       return null; 
     }
 }
