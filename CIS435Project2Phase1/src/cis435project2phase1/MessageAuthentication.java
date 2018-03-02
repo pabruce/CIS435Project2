@@ -9,10 +9,7 @@ package cis435project2phase1;
  *
  * @author dghelardini
  */
-
-//
-// Generate a Message Authentication Code
 public class MessageAuthentication 
 {
-
+    
 }

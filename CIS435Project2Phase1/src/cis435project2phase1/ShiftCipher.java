@@ -15,7 +15,7 @@ public class ShiftCipher
     public static final String ALPHABET_UPPCASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     
     //encrypt checks for both upper and lower case
-    public static String encryptShiftCipher(String plainText, int key)
+    public static String encryptShiftCipher(String plainText, int shiftKey)
     {
         String cipherText = "";
         
@@ -32,7 +32,7 @@ public class ShiftCipher
                 charPosition = ALPHABET_UPPCASE.indexOf(val);
                 if(charPosition != -1)
                 {
-                    keyVal = (key + charPosition) % 26;
+                    keyVal = (shiftKey + charPosition) % 26;
                     replaceValue = ALPHABET_UPPCASE.charAt(keyVal);
                 } 
                 else 
@@ -47,7 +47,7 @@ public class ShiftCipher
                 charPosition = ALPHABET_LOWCASE.indexOf(val);
                 if(charPosition != -1) 
                 {
-                    keyVal = (key + charPosition) % 26;
+                    keyVal = (shiftKey + charPosition) % 26;
                     replaceValue = ALPHABET_LOWCASE.charAt(keyVal);
                 } else 
                 {
