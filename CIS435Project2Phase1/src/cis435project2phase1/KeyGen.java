@@ -31,7 +31,7 @@ public class KeyGen {
         int bitlength = 1024;
          
         BigInteger e,d,n;
-        BigInteger p,q;
+        BigInteger p,q,totient;
         
         Random rand = new Random();
         
@@ -39,7 +39,13 @@ public class KeyGen {
        q = BigInteger.probablePrime(bitlength,rand);
        n = p.multiply(q);
        
-       pqSub = p.subtract(BigInteger.ONE)
-        
+       totient = p.subtract(BigInteger.ONE).multiply(q.subtract(BigInteger.ONE));
+       
+       e = BigInteger.probablePrime(bitlength /2,rand);
+       
+       while (totient.gcd(e).compareTo(BigInteger.ONE) > 0 && e.compareTo(totient) < 0)
+       {
+           e.add(BigInteger.ONE);
+       }
     }
 }
