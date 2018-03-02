@@ -9,6 +9,7 @@ package cis435project2phase1;
  *
  * @author dghelardini
  */
-public class MessageAuthentication {
+public class MessageAuthentication 
+{
     
 }
