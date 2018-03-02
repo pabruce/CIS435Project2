@@ -67,13 +67,4 @@ public class RSACipher
         return (new BigInteger(m)).modPow(d, n).toByteArray();
     }
     
-    public byte[] encrypt2(byte[] m, BigInteger e, BigInteger n)
-    {
-        return (new BigInteger(m).modPow(e, n).toByteArray());
-    }
-    
-    public byte[] decrypt2(byte[] m, BigInteger d, BigInteger n)
-    {
-        return (new BigInteger(m)).modPow(d, n).toByteArray();
-    }
 }
