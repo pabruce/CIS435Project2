@@ -26,7 +26,7 @@ private boolean isConnected = false;
 
     public ClientCA() 
     {
-
+        
     }
 
     public void Transfer() 
@@ -41,7 +41,7 @@ private boolean isConnected = false;
             isConnected = true;
             outputStream = new ObjectOutputStream(socket.getOutputStream());
 
-            Keygen keyGen = new Keygen();
+            KeyGen keyGen = new KeyGen();
             System.out.println("Object to be written = " + keyGen);
             outputStream.writeObject(keyGen);
 
@@ -56,5 +56,11 @@ private boolean isConnected = false;
             e.printStackTrace();
            }
         }
+    }
+    
+    public static void main(String[] args) 
+    {
+        ClientCA client = new ClientCA();
+        client.Transfer();
     }
 }
