@@ -14,7 +14,7 @@ public class SimpleHash {
     
     public byte hash(byte[] input)
     {
-        return input[input.length];     //while a terrible hash, and not at all secure, it is technically still a hash
+        return input[input.length - 1];     //while a terrible hash, and not at all secure, it is technically still a hash
     }
     
 }

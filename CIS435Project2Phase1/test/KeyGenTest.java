@@ -26,6 +26,7 @@ public class KeyGenTest
         System.out.println(gen.generateRandomBigPrime());
         System.out.println(gen.generateRandomBigPrime());
         System.out.println(gen.generateRandomBigPrime());
+        System.out.println(gen.GenerateKeyPair());
         System.out.println("There you go, a bunch of primes");        
     }
 }

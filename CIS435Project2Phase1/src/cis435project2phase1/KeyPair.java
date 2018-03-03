@@ -16,7 +16,7 @@ import java.math.BigInteger;
  */
 public class KeyPair implements Serializable {
     
-    public BigInteger[] bigboy;
+    public BigInteger[] bigboy = new BigInteger[3];
     
     
 }

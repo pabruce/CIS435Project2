@@ -14,6 +14,5 @@ import cis435project2phase1.RSACipher;
 
 public class DigitalSignature
 {
-    
-    
+    //public byte[] encrypt(BigInteger Sender);
 }
