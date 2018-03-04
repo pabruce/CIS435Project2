@@ -13,6 +13,11 @@ import java.math.BigInteger;
 import cis435project2phase1.KeyGen;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import cis435project2phase1.RSACipher;
+import cis435project2phase1.KeyGen;
+import cis435project2phase1.KeyPair;
+        
+
 
 
 /**
@@ -21,38 +26,47 @@ import java.util.logging.Logger;
  */
 public class ServerCA
 {
-    private ServerSocket serverSocket = null;
-    private Socket socket = null;
-    private ObjectInputStream inStream = null;
-    
-    public ServerCA()
-    {}
+    public static void main(String[] args) throws Exception
+    {
+        KeyGen gen = new KeyGen();
+        KeyPair serverKey = gen.GenerateKeyPair();
+        RSACipher rsa = new RSACipher();
+        
+        
+        BigInteger ServerD = serverKey.bigboy[0];
+        BigInteger ServerE = serverKey.bigboy[1];
+        BigInteger ServerN = serverKey.bigboy[2];
+        
+        ServerSocket server = new ServerSocket(8080);
+        
+        while(true){
+        System.out.println("server online at: " + server.getInetAddress());
+        Socket socket = server.accept();
+        
+        BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                
+        OutputStream output = socket.getOutputStream();
+        PrintWriter pwrite = new PrintWriter(output,true);
+        
+        
+        String receive;
+        
+        receive=input.readLine();
+        if(receive.isEmpty())
+        {
+        
+        }
+        else
+        {
+            System.out.println("received public key");
+            System.out.println(receive);
+            pwrite.println(RSACipher.bytetoStringConversion(rsa.encrypt2(receive.getBytes(), ServerD, ServerN)));
+            System.out.println("sent certificate");
+        }
+        socket.close();
+        }
+        
 
-    public void Transfer() throws IOException
-    {
-        try
-        {
-            serverSocket = new ServerSocket(9090);
-            socket = serverSocket.accept();
-            System.out.println("Connected");
-//            inStream = new ObjectInputStream(socket.getInputStream());
-            
-//            KeyGen keyGen = (KeyGen) inStream.readObject();
-//            System.out.println("Keys Generated " + keyGen);
-        }
-        catch (SocketException se)
-        {
-            System.exit(0);
-        }
-//        catch (ClassNotFoundException ex) 
-//        {
-//            Logger.getLogger(ServerCA.class.getName()).log(Level.SEVERE, null, ex);
-//        }
     }
     
-    public static void main(String[] args) throws IOException
-    {
-        ServerCA CA = new ServerCA();
-        CA.Transfer();
-    }
 }

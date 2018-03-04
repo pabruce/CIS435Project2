@@ -10,57 +10,52 @@ package cis435project2phase1;
  * @author bruce
  */
 
-import java.io.IOException;
+import java.io.*;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.SocketException;
 import cis435project2phase1.KeyGen;
+import java.io.BufferedReader;
+import cis435project2phase1.KeyGen;
+import cis435project2phase1.KeyPair;
+import java.math.BigInteger;
 
 public class ClientCA 
 {
-private Socket socket = null;
-private ObjectInputStream inputStream = null;
-private ObjectOutputStream outputStream = null;
-private boolean isConnected = false;
 
-    public ClientCA() 
+    public static void main(String[] args) throws Exception 
     {
+        Socket socket = new Socket("127.0.0.1", 8080);
+        BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                
+        OutputStream output = socket.getOutputStream();
+        PrintWriter pwrite = new PrintWriter(output,true);
+        
+        KeyGen gen = new KeyGen();
+        KeyPair clientKey = gen.GenerateKeyPair();
+        
+        BigInteger ClientD = clientKey.bigboy[0];
+        BigInteger ClientE = clientKey.bigboy[1];
+        BigInteger ClientN = clientKey.bigboy[2];
+        
+        pwrite.println(ClientE.toString() + ClientN.toString());
+        
+        String receive;
+        receive=input.readLine();
+        if(receive.isEmpty())
+        {
+        
+        }
+        else
+        {
+            System.out.println("received certificate");
+            System.out.println(receive);
+        
+        }
+        socket.close();
         
     }
 
-    public void Transfer() 
-    {
-
-        while (!isConnected) 
-        {
-           try 
-           {
-            socket = new Socket("localHost", 9090);
-            System.out.println("Connected");
-            isConnected = true;
-//            outputStream = new ObjectOutputStream(socket.getOutputStream());
-//
-//            KeyGen keyGen = new KeyGen();
-//            System.out.println("Object to be written = " + keyGen);
-//            outputStream.writeObject(keyGen.GenerateKeyPair());
-
-           }
-           catch (SocketException se) 
-           {
-            se.printStackTrace();
-            // System.exit(0);
-           } 
-           catch (IOException e)
-           {
-            e.printStackTrace();
-           }
-        }
-    }
     
-    public static void main(String[] args) 
-    {
-        ClientCA client = new ClientCA();
-        client.Transfer();
-    }
 }

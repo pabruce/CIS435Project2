@@ -9,24 +9,16 @@
  * @author Forrest
  */
 import cis435project2phase1.KeyGen;
-import cis435project2phase1.KeyGen.*;
+import cis435project2phase1.KeyPair;
 public class KeyGenTest
 {
     public static void main(String[] args)
     {
         KeyGen gen = new KeyGen();
-        System.out.println(gen.generateRandomBigPrime());
-        System.out.println(gen.generateRandomBigPrime());
-        System.out.println(gen.generateRandomBigPrime());
-        System.out.println(gen.generateRandomBigPrime());
-        System.out.println(gen.generateRandomBigPrime());
-        System.out.println(gen.generateRandomBigPrime());
-        System.out.println(gen.generateRandomBigPrime());
-        System.out.println(gen.generateRandomBigPrime());
-        System.out.println(gen.generateRandomBigPrime());
-        System.out.println(gen.generateRandomBigPrime());
-        System.out.println(gen.generateRandomBigPrime());
-        System.out.println(gen.GenerateKeyPair());
-        System.out.println("There you go, a bunch of primes");        
+        KeyPair key = gen.GenerateKeyPair();
+        System.out.println(key.bigboy[0]);
+        System.out.println(key.bigboy[1]);
+        System.out.println(key.bigboy[2]);
+        
     }
 }
