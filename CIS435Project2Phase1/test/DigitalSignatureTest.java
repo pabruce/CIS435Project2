@@ -62,7 +62,11 @@ public class DigitalSignatureTest
         
         message = digSig.encrypt(SenderN, ReceiverN, SenderD, ReceiverE, teststring.getBytes());
         
-        digSig.decrypt(SenderN, ReceiverN, SenderE, ReceiverD, message);
+        System.out.println("encrypted message: " + bytetoStringConversion(message));
+        
+        byte[] output = digSig.decrypt(SenderN, ReceiverN, SenderE, ReceiverD, message);
+        
+        System.out.println("decrypted message: " + new String(output));
         
         
         
