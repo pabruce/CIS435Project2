@@ -17,17 +17,26 @@ import java.math.BigInteger;
 import cis435project2phase1.BlockCipher;
 import cis435project2phase1.DigitalSignature;
 import cis435project2phase1.Final;
+import cis435project2phase1.SecureMessageSystemSimulation;
 /**
  *
  * @author Patrick
  */
 public class ReceiverFinal 
 { 
+    byte[] receivePacket;
+    
+    public ReceiverFinal()
+    {
+        System.out.println("Creating Receiver");
+        
+    }
     public byte[] processPacket(BigInteger SenderN, BigInteger ReceiverN, BigInteger SenderE, BigInteger ReceiverD, byte[] symetricKey, byte[] message) throws Exception
     {
-        String m = "hello world";
         byte[] symMessage;
         byte[] plaintext;
+        byte[] decrypted; 
+        Final encryptor = new Final();
         BlockCipher blockCipher = new BlockCipher(symetricKey);
         DigitalSignature digSig = new DigitalSignature();
         
@@ -35,6 +44,12 @@ public class ReceiverFinal
         
         plaintext = blockCipher.blockDecrypt(symMessage);
         
-        return plaintext;        
+        
+        System.out.println("Step 1: Receiver gets the packet from network");
+        System.out.println(symMessage);
+        
+        System.out.println("Step 2: Decrypt Message using decryption algorithm");
+        System.out.println(plaintext);
+         return plaintext;      
     }
 }
