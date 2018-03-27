@@ -5,16 +5,11 @@
  */
 package cis435project2phase1;
 
-import cis435project2phase1.RSACipher;
-import java.io.DataInputStream;
-import java.io.IOException;
-import cis435project2phase1.KeyGen;
-import cis435project2phase1.KeyPair;
-
-import static cis435project2phase1.RSACipher.*;
+import cis435project2phase1.Final;
 import java.math.BigInteger;
 import cis435project2phase1.BlockCipher;
 import cis435project2phase1.DigitalSignature;
+import java.nio.charset.StandardCharsets;
 
 /**
  *
@@ -22,28 +17,14 @@ import cis435project2phase1.DigitalSignature;
  */
 public class SenderFinal 
 {
-    //generates Message
-    public String generateMessage()
+    public byte[] processMessage()
     {
-        String m = "Hello World";
         
-        return m;
     }
+    //generates Message
+  
     //process message 
-    public byte[] processMessage(BigInteger SenderN, BigInteger ReceiverN, BigInteger SenderD, BigInteger ReceiverE, byte[] symetricKey, byte[] message) throws Exception
-    {
-        byte[] symMessage;
-        byte[] aSymMessage;
-        BlockCipher blockCipher = new BlockCipher(symetricKey);
-        DigitalSignature digSig = new DigitalSignature();
-        
-        symMessage = blockCipher.blockEncrypt(message);
-        
-        aSymMessage = digSig.encrypt(SenderN, ReceiverN, SenderD, ReceiverE, symMessage);
-        
-        return aSymMessage;        
-        
-    }  
+
     //send packet to network 
    // public byte[] sendPacketToNetwork()
     //{

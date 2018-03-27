@@ -16,20 +16,16 @@ import static cis435project2phase1.RSACipher.*;
 import java.math.BigInteger;
 import cis435project2phase1.BlockCipher;
 import cis435project2phase1.DigitalSignature;
-
+import cis435project2phase1.Final;
 /**
  *
  * @author Patrick
  */
 public class ReceiverFinal 
-{
-    public byte[] receivePacket(BigInteger SenderN, BigInteger ReceiverN, BigInteger SenderD, BigInteger ReceiverE, byte[] symetricKey, byte[] message) throws Exception
-    {
-      aSymMessage = digSig.encrypt(SenderN, ReceiverN, SenderD, ReceiverE, symMessage);
-    }
-    
+{ 
     public byte[] processPacket(BigInteger SenderN, BigInteger ReceiverN, BigInteger SenderE, BigInteger ReceiverD, byte[] symetricKey, byte[] message) throws Exception
     {
+        String m = "hello world";
         byte[] symMessage;
         byte[] plaintext;
         BlockCipher blockCipher = new BlockCipher(symetricKey);
@@ -41,10 +37,4 @@ public class ReceiverFinal
         
         return plaintext;        
     }
-    
-     public String getMessage()
-     {
-         
-     }
-    
 }
