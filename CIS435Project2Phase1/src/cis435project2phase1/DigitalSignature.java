@@ -40,7 +40,7 @@ public class DigitalSignature
         encrypted = rsa.encrypt2(message, ReceiverE, ReceiverN);
         
         //step 4 concatenate into output
-        output = new byte[encrypted.length + signedHash.length + 4];
+        output = new byte[encrypted.length + signedHash.length + 4]; //the last 4 bytes are an int describing signedHash.length
         len = new byte[4];
         len = ByteBuffer.allocate(4).putInt(signedHash.length).array();
         System.arraycopy(encrypted, 0, output, 0, encrypted.length);
@@ -91,7 +91,7 @@ public class DigitalSignature
         }
         else
         {
-            String error = "The Hashes are incorrect, invalid message";
+            String error = "The Hashes are incorrect, INVALID MESSAGE!!";
             System.out.println(error);
             return null;
         }

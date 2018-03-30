@@ -33,11 +33,15 @@ public class Sender1
     {
         String teststring = "Hello World. Test 1: Antelope Buffalo Cheeta";
         message = teststring.getBytes();
+        
+        System.out.printf("%-80s %s %n", "Message Generated", teststring);
     }
     
     public void setSymetricKey(byte[] symetricKey)
     {
         symKey = symetricKey;
+        
+        System.out.printf("%-80s %s %n", "Symetric key shared with Sender", RSACipher.bytetoStringConversion(symKey));
     }
         
     public void generateKeys()
@@ -47,16 +51,26 @@ public class Sender1
         N = key.bigboy[2];
         E = key.bigboy[1];
         D = key.bigboy[0];
+        
+        System.out.printf("%s %n", "Sender Keypair generated: ");
+        System.out.printf("%-20s %s %n", "Private Key", D);
+        System.out.printf("%-20s %s %n", "Public Key", E);
+        System.out.printf("%-20s %s %n", "Nvalue", N);
+        System.out.println();
     }
     
     public void registerWithCA(LocalCA auth)
     {
         certificate = auth.signKeys(name, D, N);
+        
+        System.out.printf("%s %n", RSACipher.bytetoStringConversion(certificate));
     }
     
     public void sendPacketToNetwork(NetworkFinal network)
     {
         network.getPacketFromSender(encrypted);
+        
+        System.out.printf("%-80s %s %n", "Message sent", RSACipher.bytetoStringConversion(encrypted));
     }
     
     public void encrypt(BigInteger ReceiverN, BigInteger ReceiverE) throws Exception
@@ -68,6 +82,8 @@ public class Sender1
         symMessage = blockCipher.blockEncrypt(message);
         
         encrypted = digSig.encrypt(N, ReceiverN, D, ReceiverE, symMessage);
+        
+        System.out.printf("%-80s %s %n", "Message encrypted with aes rsa and signed", RSACipher.bytetoStringConversion(encrypted));
     }
 }
 
