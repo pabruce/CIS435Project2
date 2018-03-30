@@ -10,24 +10,25 @@ package cis435project2phase1;
  */
 
 import cis435project2phase1.*;
+import java.util.Queue;
+import java.util.LinkedList;
 
 public class NetworkFinal
 {
-    byte[] senderPacket;
-    byte[] receiverPacket;
+    Queue<byte[]> channel = new LinkedList<>();
     
     NetworkFinal()
     {
         System.out.println("Created Network");
     }
     
-    public void sendPacketToReceiver(byte[] encrypted)
+    public void sendPacketToReceiver(byte[] input)
     {
-        senderPacket = encrypted;
+        channel.add(input);
     }
     
     public byte[] receiveSenderPacket()
     {
-        return receiverPacket;
+        return channel.poll();
     }
 }

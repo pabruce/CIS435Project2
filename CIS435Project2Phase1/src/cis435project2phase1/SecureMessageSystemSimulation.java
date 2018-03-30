@@ -48,6 +48,17 @@ public class SecureMessageSystemSimulation
         BigInteger ReceiverD = key.bigboy[0];
         System.out.println("\n ------Sender sends the test packet to Receiver through internet" + "\n");
         
-        network.sendPacketToReceiver(encrypted);
+        
+        teststring = "Hello World";
+        
+        //Step 1 create sender and receiver
+        //Step 2 have sender and receiver generate keys
+        //Step 3 create CA
+        //Step 4 have sender and receiver send keys to CA
+        //Step 5 (optional) have sender and receiver validate eachotehrs identity with CA
+        //Step 6 Create Network
+        //Step 7 send encrypted message over network to receiver
+        //Step 8 Receiver decrypts message
+        
     }
 }

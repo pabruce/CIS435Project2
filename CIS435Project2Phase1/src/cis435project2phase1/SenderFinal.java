@@ -30,11 +30,6 @@ public class SenderFinal
         BlockCipher blockCipher = new BlockCipher(symetricKey);
         DigitalSignature digSig = new DigitalSignature();
         Final encryptor = new Final();
-        
-        symMessage = blockCipher.blockEncrypt(message);
-        
-        aSymMessage = digSig.encrypt(SenderN, ReceiverN, SenderD, ReceiverE, symMessage);
-        
        
         
         System.out.println("Step 1: Sender Generates Message");
