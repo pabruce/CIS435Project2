@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cis435project2phase1;
+package cis435project2phase2;
 
 import java.math.BigInteger;
 
@@ -20,7 +20,7 @@ public class Receiver2
     BigInteger D;
     
     byte[] certificate;
-    byte[] symKey;
+    int symKey;
     byte[] encrypted;
     byte[] plaintext;
     
@@ -29,11 +29,11 @@ public class Receiver2
         System.out.println("Creating Receiver");
     }
     
-    public void setSymetricKey(byte[] symetricKey)
+    public void setSymetricKey(int symetricKey)
     {
         symKey = symetricKey;
         
-        System.out.printf("%-80s %s %n", "Symetric key shared with Receiver", RSACipher.bytetoStringConversion(symKey));
+        System.out.printf("%-80s %d %n", "Symetric key shared with Receiver", symKey);
     }
     
     public void generateKeys()
@@ -69,11 +69,17 @@ public class Receiver2
     public void decrypt(BigInteger SenderN, BigInteger SenderE) throws Exception
     {
         byte[] symMessage;
-        BlockCipher blockCipher = new BlockCipher(symKey);
         DigitalSignature digSig = new DigitalSignature();
+        ShiftCipher sc = new ShiftCipher();
         
         symMessage = digSig.decrypt(SenderN, N, SenderE, D, encrypted);
-        plaintext = blockCipher.blockDecrypt(symMessage);
+        if (symMessage == null)
+        {
+            String error = "invalid input";
+            plaintext = error.getBytes();
+            return;
+        }
+        plaintext = ShiftCipher.decryptShiftCipher(new String(symMessage), symKey).getBytes();
         
         System.out.printf("%-80s %s %n", "Message decrypted with aes rsa and signature checked", RSACipher.bytetoStringConversion(plaintext));
     }

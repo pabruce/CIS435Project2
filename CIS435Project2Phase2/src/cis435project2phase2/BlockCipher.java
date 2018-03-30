@@ -3,7 +3,7 @@
  * With an array of bytes to generate the encryption
  * it runs the generated key through Advanced Encryption Standard 
  */
-package cis435project2phase1;
+package cis435project2phase2;
 
 /**
  *

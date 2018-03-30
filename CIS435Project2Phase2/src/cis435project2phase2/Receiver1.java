@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cis435project2phase1;
+package cis435project2phase2;
 
 import java.math.BigInteger;
 
@@ -11,39 +11,31 @@ import java.math.BigInteger;
  *
  * @author Patrick
  */
-public class Sender1 
-{   
-    String name = "Sender1";
+public class Receiver1 
+{ 
+    String name = "Receiver1";
     
-    BigInteger N;
-    BigInteger E;
-    BigInteger D;
+    public BigInteger N;
+    public BigInteger E;
+    public BigInteger D;
     
     byte[] certificate;
     byte[] symKey;
-    byte[] message;
     byte[] encrypted;
+    public byte[] plaintext;
     
-    public Sender1()
+    public Receiver1()
     {
-        System.out.println("Created Sender");
-    }
-    
-    public void generateMessage()
-    {
-        String teststring = "Hello World. Test 1: Antelope Buffalo Cheeta";
-        message = teststring.getBytes();
-        
-        System.out.printf("%-80s %s %n", "Message Generated", teststring);
+        System.out.println("Creating Receiver");
     }
     
     public void setSymetricKey(byte[] symetricKey)
     {
         symKey = symetricKey;
         
-        System.out.printf("%-80s %s %n", "Symetric key shared with Sender", RSACipher.bytetoStringConversion(symKey));
+        System.out.printf("%-80s %s %n", "Symetric key shared with Receiver", RSACipher.bytetoStringConversion(symKey));
     }
-        
+    
     public void generateKeys()
     {
         KeyGen keyGen = new KeyGen();
@@ -52,11 +44,12 @@ public class Sender1
         E = key.bigboy[1];
         D = key.bigboy[0];
         
-        System.out.printf("%s %n", "Sender Keypair generated: ");
+        System.out.printf("%s %n", "Receiver Keypair generated: ");
         System.out.printf("%-20s %s %n", "Private Key", D);
         System.out.printf("%-20s %s %n", "Public Key", E);
         System.out.printf("%-20s %s %n", "Nvalue", N);
         System.out.println();
+
     }
     
     public void registerWithCA(LocalCA auth)
@@ -66,24 +59,22 @@ public class Sender1
         System.out.printf("%s %n", RSACipher.bytetoStringConversion(certificate));
     }
     
-    public void sendPacketToNetwork(NetworkFinal network)
+    public void receivePacketFromNetwork(NetworkFinal network)
     {
-        network.getPacketFromSender(encrypted);
+        encrypted = network.deliverPacketToReceiver();
         
-        System.out.printf("%-80s %s %n", "Message sent", RSACipher.bytetoStringConversion(encrypted));
+        System.out.printf("%-80s %s %n", "Message received", RSACipher.bytetoStringConversion(encrypted));
     }
     
-    public void encrypt(BigInteger ReceiverN, BigInteger ReceiverE) throws Exception
+    public void decrypt(BigInteger SenderN, BigInteger SenderE) throws Exception
     {
         byte[] symMessage;
         BlockCipher blockCipher = new BlockCipher(symKey);
         DigitalSignature digSig = new DigitalSignature();
         
-        symMessage = blockCipher.blockEncrypt(message);
+        symMessage = digSig.decrypt(SenderN, N, SenderE, D, encrypted);
+        plaintext = blockCipher.blockDecrypt(symMessage);
         
-        encrypted = digSig.encrypt(N, ReceiverN, D, ReceiverE, symMessage);
-        
-        System.out.printf("%-80s %s %n", "Message encrypted with aes rsa and signed", RSACipher.bytetoStringConversion(encrypted));
+        System.out.printf("%-80s %s %n", "Message decrypted with aes rsa and signature checked", RSACipher.bytetoStringConversion(plaintext));
     }
 }
-

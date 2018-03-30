@@ -3,13 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cis435project2phase1;
+package cis435project2phase2;
 /**
  *
  * @author Patrick
  */
 
-import cis435project2phase1.*;
 import java.util.Queue;
 import java.util.LinkedList;
 

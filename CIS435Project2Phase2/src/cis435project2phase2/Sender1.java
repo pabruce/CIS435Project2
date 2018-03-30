@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cis435project2phase1;
+package cis435project2phase2;
 
 import java.math.BigInteger;
 
@@ -11,27 +11,27 @@ import java.math.BigInteger;
  *
  * @author Patrick
  */
-public class Sender2 
+public class Sender1 
 {   
-    String name = "Sender2";
+    String name = "Sender1";
     
-    BigInteger N;
-    BigInteger E;
-    BigInteger D;
+    public BigInteger N;
+    public BigInteger E;
+    public BigInteger D;
     
     byte[] certificate;
     byte[] symKey;
     byte[] message;
     byte[] encrypted;
     
-    public Sender2()
+    public Sender1()
     {
         System.out.println("Created Sender");
     }
     
     public void generateMessage()
     {
-        String teststring = "Hello World. Test 1: Antelope Buffalo Cheeta";
+        String teststring = "Hello World. Testing: Antelope Buffalo Cheeta";
         message = teststring.getBytes();
         
         System.out.printf("%-80s %s %n", "Message Generated", teststring);

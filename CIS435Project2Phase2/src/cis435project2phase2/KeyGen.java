@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cis435project2phase1;
+package cis435project2phase2;
 
 //import java.time.Instant;
 import java.util.Random;
 import java.math.BigInteger;
-import cis435project2phase1.KeyPair;
+import cis435project2phase2.KeyPair;
         
 /**
  *

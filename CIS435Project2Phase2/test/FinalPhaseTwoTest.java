@@ -8,48 +8,22 @@
  *
  * @author Patrick
  */
-import java.io.DataInputStream;
-import java.io.IOException;
-import cis435project2phase1.Final;
-import cis435project2phase1.KeyGen;
-import cis435project2phase1.KeyPair;
-import static cis435project2phase1.RSACipher.bytetoStringConversion;
-import java.math.BigInteger;
-import java.nio.charset.StandardCharsets;
+import cis435project2phase2.LocalCA;
+import cis435project2phase2.NetworkFinal;
+import cis435project2phase2.Receiver1;
+import cis435project2phase2.SecureMessageSystemSimulation;
+import cis435project2phase2.Sender1;
+import cis435project2phase2.ShiftCipher;
 
 public class FinalPhaseTwoTest
 {
-    @SuppressWarnings("deprecation")
-    public static void main(String[] args) throws IOException, Exception
+    public static void main(String[] args) throws Exception
     {
-        DataInputStream in = new DataInputStream(System.in);
-        KeyGen keyGen = new KeyGen();
-        KeyPair key = keyGen.GenerateKeyPair();
-        Final encryptor = new Final();
+       SecureMessageSystemSimulation test = new SecureMessageSystemSimulation();
         
-        String teststring;
-        byte[] encrypted;
-        byte[] symetricKey = "MZytUvNdHCpFroLb".getBytes(StandardCharsets.UTF_8);
-        byte[] decrypted;
-        BigInteger SenderN = key.bigboy[2];
-        BigInteger SenderE = key.bigboy[1];
-        BigInteger SenderD = key.bigboy[0];
-        
-        BigInteger ReceiverN = key.bigboy[2];
-        BigInteger ReceiverE = key.bigboy[1];
-        BigInteger ReceiverD = key.bigboy[0];
-        
-        System.out.println("Enter the plain text:");
-        teststring = in.readLine();
-        System.out.println("Encrypting String: " + teststring);
-        System.out.println("String in Bytes: " + bytetoStringConversion(teststring.getBytes()));
-        
-        encrypted = encryptor.encrypt(SenderN, ReceiverN, SenderD, ReceiverE, symetricKey, teststring.getBytes());
-        
-        System.out.println("Ciphered RSAed and Signed String: " + bytetoStringConversion(encrypted));
-        
-        decrypted = encryptor.decrypt(SenderN, ReceiverN, SenderE, ReceiverD, symetricKey, encrypted);
-        
-        System.out.println("Decrypted String: " + new String(decrypted));
+        test.test1();
+        test.test2();
+        test.test3();
+        test.test4();        
     }
 }

@@ -3,7 +3,7 @@
  * It runs the input by letter and returns an encryption/decryption
  * It can handle Lowercase, Uppercase and Spaces
  */
-package cis435project2phase1;
+package cis435project2phase2;
 /**
  *
  * @author Patrick Bruce
@@ -25,7 +25,7 @@ public class ShiftCipher
             char replaceValue;
             int keyVal = -1;
             char val = plainText.charAt(i);
-            System.out.println(val);
+            //System.out.println(val);
             //checks here for upper case letters
             if(Character.isUpperCase(val))
             {
@@ -63,6 +63,10 @@ public class ShiftCipher
 
     public static String decryptShiftCipher(String cipherText, int shiftKey)
     {
+        if (cipherText == null)
+        {
+            return "error invalid input";
+        }
         String plainText = "";
         for (int i = 0; i < cipherText.length(); i++)
         {

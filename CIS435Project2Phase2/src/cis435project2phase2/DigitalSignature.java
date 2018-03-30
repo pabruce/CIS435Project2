@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cis435project2phase1;
+package cis435project2phase2;
 
 import java.math.BigInteger;
         
@@ -12,7 +12,7 @@ import java.math.BigInteger;
  *
  * @author dghelardini
  */
-import cis435project2phase1.RSACipher;
+import cis435project2phase2.RSACipher;
 import java.io.DataInputStream;
 import java.nio.ByteBuffer;
 

@@ -3,7 +3,7 @@
  * It takes the bytes into an array and then decrypts the bytes into strings. 
  * 
  */
-package cis435project2phase1;
+package cis435project2phase2;
 
 /**
  *
@@ -14,7 +14,7 @@ package cis435project2phase1;
 
 import java.math.BigInteger;
 import java.util.Random;
-import cis435project2phase1.KeyGen;
+import cis435project2phase2.KeyGen;
 
 
 
