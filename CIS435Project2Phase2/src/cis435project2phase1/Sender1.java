@@ -11,9 +11,9 @@ import java.math.BigInteger;
  *
  * @author Patrick
  */
-public class Receiver2 
-{ 
-    String name = "Receiver2";
+public class Sender1 
+{   
+    String name = "Sender1";
     
     BigInteger N;
     BigInteger E;
@@ -21,21 +21,29 @@ public class Receiver2
     
     byte[] certificate;
     byte[] symKey;
+    byte[] message;
     byte[] encrypted;
-    byte[] plaintext;
     
-    public Receiver2()
+    public Sender1()
     {
-        System.out.println("Creating Receiver");
+        System.out.println("Created Sender");
+    }
+    
+    public void generateMessage()
+    {
+        String teststring = "Hello World. Test 1: Antelope Buffalo Cheeta";
+        message = teststring.getBytes();
+        
+        System.out.printf("%-80s %s %n", "Message Generated", teststring);
     }
     
     public void setSymetricKey(byte[] symetricKey)
     {
         symKey = symetricKey;
         
-        System.out.printf("%-80s %s %n", "Symetric key shared with Receiver", RSACipher.bytetoStringConversion(symKey));
+        System.out.printf("%-80s %s %n", "Symetric key shared with Sender", RSACipher.bytetoStringConversion(symKey));
     }
-    
+        
     public void generateKeys()
     {
         KeyGen keyGen = new KeyGen();
@@ -44,12 +52,11 @@ public class Receiver2
         E = key.bigboy[1];
         D = key.bigboy[0];
         
-        System.out.printf("%s %n", "Receiver Keypair generated: ");
+        System.out.printf("%s %n", "Sender Keypair generated: ");
         System.out.printf("%-20s %s %n", "Private Key", D);
         System.out.printf("%-20s %s %n", "Public Key", E);
         System.out.printf("%-20s %s %n", "Nvalue", N);
         System.out.println();
-
     }
     
     public void registerWithCA(LocalCA auth)
@@ -59,22 +66,24 @@ public class Receiver2
         System.out.printf("%s %n", RSACipher.bytetoStringConversion(certificate));
     }
     
-    public void receivePacketFromNetwork(NetworkFinal network)
+    public void sendPacketToNetwork(NetworkFinal network)
     {
-        encrypted = network.deliverPacketToReceiver();
+        network.getPacketFromSender(encrypted);
         
-        System.out.printf("%-80s %s %n", "Message received", RSACipher.bytetoStringConversion(encrypted));
+        System.out.printf("%-80s %s %n", "Message sent", RSACipher.bytetoStringConversion(encrypted));
     }
     
-    public void decrypt(BigInteger SenderN, BigInteger SenderE) throws Exception
+    public void encrypt(BigInteger ReceiverN, BigInteger ReceiverE) throws Exception
     {
         byte[] symMessage;
         BlockCipher blockCipher = new BlockCipher(symKey);
         DigitalSignature digSig = new DigitalSignature();
         
-        symMessage = digSig.decrypt(SenderN, N, SenderE, D, encrypted);
-        plaintext = blockCipher.blockDecrypt(symMessage);
+        symMessage = blockCipher.blockEncrypt(message);
         
-        System.out.printf("%-80s %s %n", "Message decrypted with aes rsa and signature checked", RSACipher.bytetoStringConversion(plaintext));
+        encrypted = digSig.encrypt(N, ReceiverN, D, ReceiverE, symMessage);
+        
+        System.out.printf("%-80s %s %n", "Message encrypted with aes rsa and signed", RSACipher.bytetoStringConversion(encrypted));
     }
 }
+

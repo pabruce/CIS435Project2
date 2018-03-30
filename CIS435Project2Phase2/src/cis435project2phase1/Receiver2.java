@@ -13,7 +13,7 @@ import java.math.BigInteger;
  */
 public class Receiver2 
 { 
-    String name = "Receiver2";
+    String name = "Receiver1";
     
     BigInteger N;
     BigInteger E;

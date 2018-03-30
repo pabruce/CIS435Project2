@@ -11,9 +11,9 @@ import java.math.BigInteger;
  *
  * @author Patrick
  */
-public class Receiver2 
+public class Receiver1 
 { 
-    String name = "Receiver2";
+    String name = "Receiver1";
     
     BigInteger N;
     BigInteger E;
@@ -24,7 +24,7 @@ public class Receiver2
     byte[] encrypted;
     byte[] plaintext;
     
-    public Receiver2()
+    public Receiver1()
     {
         System.out.println("Creating Receiver");
     }
