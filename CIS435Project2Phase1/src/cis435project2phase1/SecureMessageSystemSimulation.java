@@ -58,6 +58,42 @@ public class SecureMessageSystemSimulation
         receiver1.decrypt(sender1.N, sender1.E);
         
         System.out.printf("%-80s %s %n", "Message converted to String:", new String(receiver1.plaintext));
+        System.out.println(line+"\n\n\n");
+        
+        
+        
+        System.out.println("Test 2: Block Cipher, RSA, DigSig. Altered message\n"+line);
+        System.out.println("Sender, Receiver, CA, and Network already exist.\n");
+        
+        //Step 2 have sender and receiver generate keys and share symetric key
+        sender1.generateKeys();
+        receiver1.generateKeys();
+        sender1.setSymetricKey(symetricKey);
+        receiver1.setSymetricKey(symetricKey);
+        
+        System.out.println();
+        
+        //Step 3 have sender and receiver register with CA
+        sender1.registerWithCA(ca);
+        receiver1.registerWithCA(ca);
+        
+        System.out.println();
+        
+        //Step 4 Sender encrypts and sends message
+        sender1.generateMessage();
+        sender1.encrypt(receiver1.N, receiver1.E);
+        sender1.sendPacketToNetwork(net);
+        
+        System.out.println("\t\t\t\t---Message Altered---");
+        net.packetGetHacked();
+                
+        //Step 5 Receiver gets and decrypts message
+        receiver1.receivePacketFromNetwork(net);
+        receiver1.decrypt(sender1.N, sender1.E);
+        
+        System.out.printf("%-80s %s %n", "Message converted to String:", new String(receiver1.plaintext));
+        System.out.println(line+"\n\n");
+        
         
         
     }
