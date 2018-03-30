@@ -11,15 +11,7 @@ package cis435project2phase1;
  * @author bruce
  */
 
-import java.io.DataInputStream;
 import java.io.IOException;
-import cis435project2phase1.SenderFinal;
-import cis435project2phase1.ReceiverFinal;
-import cis435project2phase1.KeyGen;
-import cis435project2phase1.KeyPair;
-import static cis435project2phase1.RSACipher.bytetoStringConversion;
-import java.math.BigInteger;
-import java.nio.charset.StandardCharsets;
 
 
 public class SecureMessageSystemSimulation 
@@ -27,38 +19,36 @@ public class SecureMessageSystemSimulation
     @SuppressWarnings("deprecation")
     public static void main(String[] args) throws IOException, Exception
     {
-        KeyGen keyGen = new KeyGen();
-        KeyPair key = keyGen.GenerateKeyPair();
-        SenderFinal encryptor = new SenderFinal();
-        ReceiverFinal decryptor = new ReceiverFinal();
-        SenderFinal sender = new SenderFinal();
-        ReceiverFinal receiver = new ReceiverFinal();
-        NetworkFinal network = new NetworkFinal();
-        
-        String teststring;
-        byte[] encrypted;
-        byte[] symetricKey = "MZytUvNdHCpFroLb".getBytes(StandardCharsets.UTF_8);
-        byte[] decrypted;
-        BigInteger SenderN = key.bigboy[2];
-        BigInteger SenderE = key.bigboy[1];
-        BigInteger SenderD = key.bigboy[0];
-        
-        BigInteger ReceiverN = key.bigboy[2];
-        BigInteger ReceiverE = key.bigboy[1];
-        BigInteger ReceiverD = key.bigboy[0];
-        System.out.println("\n ------Sender sends the test packet to Receiver through internet" + "\n");
+        byte[] symetricKey = "MZytUvNdHCpFroLb".getBytes();
         
         
-        teststring = "Hello World";
+        //Step 1 create sender and receiver and CA
+        Sender1 sender1 = new Sender1();
+        Receiver1 receiver1 = new Receiver1();
+        LocalCA ca = new LocalCA();
+        NetworkFinal net = new NetworkFinal();
         
-        //Step 1 create sender and receiver
         //Step 2 have sender and receiver generate keys
-        //Step 3 create CA
-        //Step 4 have sender and receiver send keys to CA
-        //Step 5 (optional) have sender and receiver validate eachotehrs identity with CA
-        //Step 6 Create Network
-        //Step 7 send encrypted message over network to receiver
-        //Step 8 Receiver decrypts message
+        sender1.generateKeys();
+        receiver1.generateKeys();
+        sender1.setSymetricKey(symetricKey);
+        receiver1.setSymetricKey(symetricKey);
+        
+        //Step 3 have sender and receiver register with CA
+        sender1.registerWithCA(ca);
+        
+        //Step 4 Sender encrypts and sends message
+        sender1.generateMessage();
+        sender1.encrypt(receiver1.N, receiver1.E);
+        sender1.sendPacketToNetwork(net);
+        
+       // net.packetGetHacked();
+        
+        //Step 5 Receiver gets and decrypts message
+        receiver1.receivePacketFromNetwork(net);
+        receiver1.decrypt(sender1.N, sender1.E);
+        System.out.println(new String(receiver1.plaintext));
+        
         
     }
 }

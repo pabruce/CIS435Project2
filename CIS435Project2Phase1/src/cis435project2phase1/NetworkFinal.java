@@ -15,20 +15,28 @@ import java.util.LinkedList;
 
 public class NetworkFinal
 {
-    Queue<byte[]> channel = new LinkedList<>();
+    byte[] channel;
     
-    NetworkFinal()
+    public NetworkFinal()
     {
         System.out.println("Created Network");
     }
     
-    public void sendPacketToReceiver(byte[] input)
+    public void getPacketFromSender(byte[] input)
     {
-        channel.add(input);
+        channel = input;
     }
     
-    public byte[] receiveSenderPacket()
+    public byte[] deliverPacketToReceiver()
     {
-        return channel.poll();
+        return channel;
+    }
+    
+    public void packetGetHacked()
+    {
+        for(int i = 30; i < channel.length-100; i++)
+        {
+            channel[i] = (byte) 0x2f;
+        }
     }
 }

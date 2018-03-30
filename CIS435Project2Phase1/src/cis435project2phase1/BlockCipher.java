@@ -39,6 +39,11 @@ public class BlockCipher
      //Decrypts the given byte array
     public byte[] blockDecrypt(byte[] cipherText) throws Exception
     {
+        if (cipherText == null)
+        {
+            String error = "error: empty input";
+            return error.getBytes();
+        }
         SecretKeySpec secretKey = new SecretKeySpec(key, BlockAES);
         Cipher cipher = Cipher.getInstance(BlockAES);
         cipher.init(Cipher.DECRYPT_MODE, secretKey);

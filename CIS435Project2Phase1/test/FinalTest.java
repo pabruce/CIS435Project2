@@ -25,20 +25,21 @@ public class FinalTest
     {
         DataInputStream in = new DataInputStream(System.in);
         KeyGen keyGen = new KeyGen();
-        KeyPair key = keyGen.GenerateKeyPair();
+        KeyPair skey = keyGen.GenerateKeyPair();
+        KeyPair rkey = keyGen.GenerateKeyPair();
         Final encryptor = new Final();
         
         String teststring;
         byte[] encrypted;
         byte[] symetricKey = "MZytUvNdHCpFroLb".getBytes(StandardCharsets.UTF_8);
         byte[] decrypted;
-        BigInteger SenderN = key.bigboy[2];
-        BigInteger SenderE = key.bigboy[1];
-        BigInteger SenderD = key.bigboy[0];
+        BigInteger SenderN = skey.bigboy[2];
+        BigInteger SenderE = skey.bigboy[1];
+        BigInteger SenderD = skey.bigboy[0];
         
-        BigInteger ReceiverN = key.bigboy[2];
-        BigInteger ReceiverE = key.bigboy[1];
-        BigInteger ReceiverD = key.bigboy[0];
+        BigInteger ReceiverN = rkey.bigboy[2];
+        BigInteger ReceiverE = rkey.bigboy[1];
+        BigInteger ReceiverD = rkey.bigboy[0];
         
         System.out.println("Enter the plain text:");
         teststring = in.readLine();

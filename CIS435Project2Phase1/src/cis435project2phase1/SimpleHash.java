@@ -12,10 +12,19 @@ package cis435project2phase1;
  */
 public class SimpleHash {
     
-    public byte hash(byte[] input)
+    public byte defunctHash(byte[] input)
     {
         return input[input.length - 1];     //while a terrible hash, and not at all secure, it is technically still a hash
     }
     
+    public byte hash(byte[] input)
+    {
+        byte sum = 0x00;
+        for (byte b : input)
+        {
+            sum = (byte)(sum ^ b);
+        }
+        return sum;
+    }
 }
     

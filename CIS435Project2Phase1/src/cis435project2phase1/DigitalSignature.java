@@ -14,6 +14,7 @@ import java.math.BigInteger;
  */
 import cis435project2phase1.RSACipher;
 import java.io.DataInputStream;
+import java.nio.ByteBuffer;
 
 
 public class DigitalSignature
@@ -27,6 +28,7 @@ public class DigitalSignature
         byte[] signedHash;
         byte[] encrypted;
         byte[] output;
+        byte[] len;
         
         //step 1 hash message store in hash
         hash = new byte[]{hasher.hash(message)};
@@ -38,9 +40,12 @@ public class DigitalSignature
         encrypted = rsa.encrypt2(message, ReceiverE, ReceiverN);
         
         //step 4 concatenate into output
-        output = new byte[encrypted.length + signedHash.length];
+        output = new byte[encrypted.length + signedHash.length + 4];
+        len = new byte[4];
+        len = ByteBuffer.allocate(4).putInt(signedHash.length).array();
         System.arraycopy(encrypted, 0, output, 0, encrypted.length);
         System.arraycopy(signedHash, 0, output, encrypted.length, signedHash.length);
+        System.arraycopy(len, 0, output, encrypted.length + signedHash.length, 4);
                 
         return output;
     }
@@ -51,15 +56,21 @@ public class DigitalSignature
         RSACipher rsa = new RSACipher();
         SimpleHash hasher = new SimpleHash();
         
-        byte[] encrypted = new byte[message.length - 256];
-        byte[] signedHash = new byte[256];
+        byte[] encrypted;
+        byte[] signedHash;
         byte[] decryptedHash;
         byte[] messageHash;
         byte[] plaintext;
+        byte[] len = new byte[4];
+        int length;
         
         //step 1 break message into encrypted and signedHash
-        System.arraycopy(message, 0, encrypted, 0, message.length - 256);
-        System.arraycopy(message, message.length - 256, signedHash, 0, 256);
+        System.arraycopy(message, message.length - 4, len, 0, 4);
+        length = ByteBuffer.wrap(len).getInt();
+        encrypted = new byte[message.length - length - 4];
+        signedHash = new byte[length];
+        System.arraycopy(message, 0, encrypted, 0, message.length - length - 4);
+        System.arraycopy(message, message.length - length - 4, signedHash, 0, length);
         
         //step 2 decrypt signedHash into decryptedHash
         decryptedHash = rsa.decrypt2(signedHash, SenderE, SenderN);
@@ -82,7 +93,7 @@ public class DigitalSignature
         {
             String error = "The Hashes are incorrect, invalid message";
             System.out.println(error);
-            return error.getBytes();
+            return null;
         }
     }
 }
