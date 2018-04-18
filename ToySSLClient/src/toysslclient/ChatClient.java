@@ -9,7 +9,7 @@ public class ChatClient
 {
     
     static final int DEFAULT_PORT = 1728;
-    static final String HANDSHAKE = "CIS435/535";
+    static final String HANDSHAKE = "CIS435535";
     static final char MESSAGE = '0'; 
     static final char CLOSE = '1'; 
     static final int MASTER_KEY = 1234;
@@ -50,20 +50,25 @@ public class ChatClient
 
         BufferedReader userInput; // A wrapper for System.in, for reading
 
-        try {
+        try 
+        {
             System.out.println("Connecting to " + computer + " on port " + port);
             connection = new Socket(computer,port);
             incoming = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
             outgoing = new DataOutputStream(connection.getOutputStream());
+            System.out.println("Send handshake data to client");
             outgoing.writeBytes(HANDSHAKE + "\r");  // Send handshake
             outgoing.flush();
+            System.out.println("Receive handshake data from client");
             messageIn = incoming.readLine();  // Receive handshake
-            if (! messageIn.equals(HANDSHAKE) ) {
+            if (! messageIn.equals(HANDSHAKE) ) 
+            {
                 throw new IOException("Connected program is not CLChat!");
             }
 
             // Get Server nonce from Server
+            System.out.println("Get Nonce from Server");
             String serverNonceString = incoming.readLine();
             sNonce = Integer.valueOf(serverNonceString);
             System.out.println("Server Nonce: " + sNonce);
@@ -72,7 +77,9 @@ public class ChatClient
             Random random = new Random(System.currentTimeMillis());
             cNonce = random.nextInt(10) + 1;
             outgoing.writeBytes(cNonce + "\r");
-            System.out.println("Client Nonce: " + cNonce);
+            System.out.println("Step 1: Generate Client Nonce and Assume Algorithm (RSA + Hash)");
+            
+            System.out.println("Generate Client Nonce: " + cNonce);
             outgoing.flush();
 
             // Get public key values from server for Server's Public Key Encryption
@@ -103,7 +110,7 @@ public class ChatClient
             RSAPublicKeyCalculator serverPublicKey = new RSAPublicKeyCalculator(41, 43);
 
             // Add nonces master key 
-
+            System.out.println("Step 4: Generate Pre Master Secret, Encrypt with Server PublicKey, Send to Server");
             System.out.println("Master before Nonces: " + MASTER_KEY);
             int masterKey = MASTER_KEY + sNonce + cNonce;
             System.out.println("Master with Nonces: " + masterKey);
@@ -178,12 +185,13 @@ public class ChatClient
                     System.out.println("Connection closed.");
                     break;
                 }
-
-                System.out.println("Master Key: " + MASTER_KEY);
+                System.out.println("Step 4: Client Extracts data from Packets and Generate Mac Keys ");
+                System.out.println("Generate Master Key: " + MASTER_KEY);
                 type = 0;
                 int Mc = generateClientMACKey(MASTER_KEY, cNonce, sNonce);
-                System.out.println("Mc: " + Mc);
+                System.out.println("Generate Mac Client Key: Mc: " + Mc);
                 String hashNum = hashEncryptMAC(serverClientNum, type, Mc, messageOut);
+                System.out.println("Step 5: Send out Mac client keys");
                 System.out.println("Hash: " + hashNum);
                 String message = stringConvert(messageOut);
 
@@ -240,6 +248,7 @@ public class ChatClient
                 int Ms = generateServerMACKey(MASTER_KEY, cNonce, sNonce);
                 String hashNumStringCmp = hashDecryptMAC(serverSeqNum, serverType, Ms, messageDecrypted.substring(0, messageDecrypted.length() - 1));
 
+                System.out.println("Step 7: Check if macs are equal");
                 System.out.println("hash: " + hashNumString);
                 System.out.println("hashStringCmp: " + hashNumStringCmp);
                 if(!hashNumString.equals(hashNumStringCmp)){
@@ -405,18 +414,6 @@ public class ChatClient
         }
 
         return result;
-
-
-
-
-
-
-
-
-
-
-
-
 
     }
     public static String convertNumToChar(String c) {

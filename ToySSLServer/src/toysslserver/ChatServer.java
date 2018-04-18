@@ -8,7 +8,7 @@ import java.util.Random;
 public class ChatServer 
 {
     static final int DEFAULT_PORT = 1728;
-    static final String HANDSHAKE = "CIS435/535";
+    static final String HANDSHAKE = "CIS435535";
     static final char MESSAGE = '0';
     static final char CLOSE = '1'; 
     static final int MASTER_KEY = 1234;
@@ -55,9 +55,11 @@ public class ChatServer
             listener.close();
             incoming = new BufferedReader(new InputStreamReader(connection.getInputStream()) );
             outgoing = new DataOutputStream(connection.getOutputStream());
+            System.out.println("Send hanshake data to client");
             outgoing.writeBytes(HANDSHAKE + "\r");  // Send handshake to client.
             outgoing.flush();
-
+            
+            System.out.println("Receive Handshake Data From Client");
             messageIn = incoming.readLine();  // Receive handshake from client.
             if (! HANDSHAKE.equals(messageIn) ) {
                 throw new Exception("Connected program is not a ChatClient!");
@@ -70,14 +72,15 @@ public class ChatServer
             // Send server nonce to client
             Random random = new Random(System.currentTimeMillis());
             sNonce = random.nextInt(10) + 1;
-            System.out.println("Server Nonce: " + sNonce);
+            System.out.println("Generate Server Nonce: " + sNonce);
             outgoing.writeBytes(sNonce + "\r");
             outgoing.flush();
 
             // Get nonce from client
             String cNonceString = incoming.readLine();
             cNonce = Integer.valueOf(cNonceString);
-            System.out.println("Client Nonce: " + cNonce);
+            System.out.println("Step 2: Received and Saved Client Packet");
+            System.out.println("Save Client Nonce: " + cNonce);
 
             // Send Servers key values 
             outgoing.writeBytes(String.valueOf(publicKey.getN()) + " " + String.valueOf(publicKey.getE()) + "\r");
@@ -142,6 +145,7 @@ public class ChatServer
 
                     int Mc = generateClientMACKey(MASTER_KEY, cNonce, sNonce);
 
+                    System.out.println("Step 7: Check if macs are equal");
                     String hashNumString2 = hashDecrypt(clientType, clientSeqNum, Mc, messageDecrypted.substring(0, messageDecrypted.length() - 1));
                     System.out.println("Hash: " + hashNumString);
                     System.out.println("hashNumString2:" + hashNumString2);
@@ -162,47 +166,13 @@ public class ChatServer
                         break;
                     }
                 }
-
-                typeString = messageIn.substring(0, 1);
-                System.out.println("Type (Client): " + typeString);
-                int clientType = Integer.valueOf(typeString);
-                lengthString = messageIn.substring(1, 3);
-                length = Integer.valueOf(lengthString);
-                System.out.println("Length (Client): " + lengthString);
-                clientSeqNumString = messageIn.substring(3,4);
-                System.out.println("Sequence Number (Client): " + clientSeqNumString);
-
-
-                String messageEncrypted = messageIn.substring(4);
-                System.out.println("EncryptedMessage: " + messageEncrypted);
-                String messageDecrypted = clientDecrypt(messageEncrypted);
-                System.out.println("DecryptedMessage: " + messageDecrypted);
-
-                hashNumString = messageDecrypted.substring(messageDecrypted.length() - 1);
-
-                int Mc = generateClientMACKey(MASTER_KEY, cNonce, sNonce);
-
-                String hashNumStringCmp = hashDecrypt(clientType, clientSeqNum, Mc, messageDecrypted.substring(0, messageDecrypted.length() - 1));
-                System.out.println("Hash: " + hashNumString);
-                System.out.println("hashNumString2:" + hashNumStringCmp);
-                
-                if(!hashNumString.equals(hashNumStringCmp))
-                {
-                    throw new Exception("Macs don't match!");
-                }
-
-                String messageBeforeDecrypt = messageDecrypted.substring(0, messageDecrypted.length() - 1);
-                System.out.println("messageBeforeDecrypt: " + messageBeforeDecrypt);
-
-                String messageFinal = stringConvertBack(messageBeforeDecrypt);
-                System.out.println("RECEIVED:  " + messageFinal);
-
                 System.out.print("SEND:      ");
                 messageOut = userInput.readLine();
                 if (messageOut.equals("quit"))  
                 {
                     type = 1;
                     typeString = "1";
+                    System.out.println("Step 4: Server Extracts data from Packets and Generate Mac Keys ");
                     int Ms = generateServerMACKey(MASTER_KEY, cNonce, sNonce);
                     System.out.println("Ms: " + Ms);
                     System.out.println("Sequence Number (Server): " + serverSeqNum);
@@ -234,6 +204,7 @@ public class ChatServer
                 int Ms = generateServerMACKey(MASTER_KEY, cNonce, sNonce);
                 System.out.println("Ms: " + Ms);
                 System.out.println("Sequence Number (Server): " + serverSeqNum);
+                System.out.println("Step 5: Send out Mac server keys");
                 hashNumString = hashEncrypt(serverSeqNum, type, Ms, messageOut);
                 System.out.println("Hash: " + hashNumString);
                 String message = stringConvert(messageOut);
